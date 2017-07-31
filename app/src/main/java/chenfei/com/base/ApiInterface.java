@@ -63,6 +63,12 @@ public class ApiInterface {
      */
     public static final String Getmyorderlist = baseurl + "new/getmyorderlist.php?";
 
+    /**
+     * 提交校车订单
+     */
+    public static final String SubmitSchoolbus = baseurl + "saveschoolbus.php?";
+
+
 
 
 

@@ -98,6 +98,9 @@
         <activity android:name="chenfei.com.activity.UserInfoActivity"
             android:configChanges="screenSize|orientation|keyboardHidden"
             android:screenOrientation="portrait" ></activity>
+        <activity android:name="chenfei.com.home.SchoolBusActivity"
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:screenOrientation="portrait" ></activity>
     </application>
 
 </manifest>

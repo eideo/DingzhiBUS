@@ -424,7 +424,7 @@ public class WzActivity extends BaseActivity implements
 			tx.setText(city + "(" + dataString + ")");
 			// Toast.makeText(getApplicationContext(), city, 0).show();
 			String street = location.getStreet();// 文曲路
-			keyWorldsView.setText(street);
+			//.setText(street);
 			// district = location.getDistrict();// 肥西县
 			// longitude = location.getLongitude();
 			// latitude = location.getLatitude();

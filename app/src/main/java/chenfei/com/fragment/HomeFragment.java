@@ -39,6 +39,7 @@ import org.xutils.DbManager;
 import chenfei.com.activity.DingzhiBusActivity;
 import chenfei.com.activity.MainActivity;
 import chenfei.com.base.R;
+import chenfei.com.home.SchoolBusActivity;
 
 import android.widget.LinearLayout;
 
@@ -94,7 +95,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
 
             case R.id.xiaochefuwull:
-
+                startActivity(new Intent(getActivity(), SchoolBusActivity.class));
                 break;
             case R.id.banxianbanchell:
                 break;
