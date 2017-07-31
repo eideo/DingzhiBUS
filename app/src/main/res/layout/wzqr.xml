@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/login_top_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorPrimary" >
+
+        <Button
+            android:id="@+id/login_reback_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/title_btn_back"
+            android:onClick="goBack"            
+            android:layout_marginLeft="20dp" />
+
+        <TextView
+            android:id="@+id/city"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:text="位置确认"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/ok_btn"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:onClick="wz_ok"
+            android:background="@null"
+            android:textColor="@android:color/white"
+            android:text="确定"
+            android:textSize="14sp" />
+    </LinearLayout>
+  <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="45dp">
+    <AutoCompleteTextView
+        android:id="@+id/et"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/login_editbox"
+        android:drawableLeft="@drawable/search_edit"
+        android:hint="输入地址或者语音录入地址"
+        android:padding="10px"
+        android:singleLine="true" />
+    <ImageView
+        android:id="@+id/iv_voice1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/et"
+        android:layout_marginRight="5dp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/voice" />
+
+ </RelativeLayout>
+   <LinearLayout
+       android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+        
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="vertical"
+        >
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/map"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"           
+            android:clickable="true" />
+        <ImageView 
+            android:id="@+id/mapzhizheng"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"   
+            android:src="@drawable/current_location"        
+             />
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/serchresultlist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true" />
+</LinearLayout>
+</LinearLayout>

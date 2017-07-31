@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="baochefangshi">
+        <item>单程</item>
+        <item>往返</item>
+        <item>包天</item>
+    </string-array>   
+    <string-array name="cheling">
+        <item>不限</item>
+        <item>1年以内</item>
+        <item>3年以内</item>
+        <item>5年以内</item>
+        <item>5年以上</item>
+    </string-array>
+     <string-array name="ticketnum">
+        <item>1张</item>
+        <item>2张</item>
+        <item>3张</item>
+        <item>4张</item>
+        <item>5张</item>
+    </string-array>
+      <string-array name="buyway">
+        <item>现金</item>
+        <item>支付宝</item>
+        <item>微信</item>
+    </string-array>
+</resources>

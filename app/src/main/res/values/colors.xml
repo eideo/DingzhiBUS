@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#45c01a</color>
+    <color name="colorPrimaryDark">#45c01a</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="uvv_green">#45c01a</color>
+    <color name="uvv_black">#ff000000</color>
+    <color name="uvv_light_gray">#ffF0F0F0</color>
+    <color name="uvv_gray">#ffbbbbbb</color>
+    <color name="white">#ffffff</color>
+    <color name="teal">#00796B</color>
+    <color name="brown">#8D6E63</color>
+    <color name="blue">#2196F3</color>
+    <color name="grey">#607D8B</color>
+    <color name="orange">#F57C00</color>
+    <color name="lightgrey">#F7E1DBDB</color>
+    <color name="color_hint_text">#6c6c6c</color>
+    <!-- 分割线颜色值 -->
+    <color name="color_separate_line">#6c6c6c</color>
+    <color name="color_button_touched">#458528</color>
+    <color name="lightgray">#d3d3d3</color> <!-- 亮灰色 -->
+    <color name="background_tab_pressed">#6633B5E5</color>
+    <color name="red">#ef3320</color>
+</resources>

@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/nav_header_bg"
+            android:scaleType="centerCrop" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/touxiang"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_avatar" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/touxiang"
+                android:layout_centerHorizontal="true"
+                android:padding="16dp"
+                android:text="陈飞"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/qianming"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name"
+                android:layout_centerHorizontal="true"
+                android:text="签名：今天又是新的一天"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </FrameLayout>
+    <RelativeLayout
+        android:id="@+id/accountinfo"
+        android:layout_width="match_parent"
+        android:clickable="true"
+        android:background="@drawable/selector"
+        android:layout_height="60dp">
+        <ImageView
+            android:id="@+id/zhanghulogo"
+            android:layout_marginTop="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/xinshouzhinan" />
+
+        <TextView
+            android:id="@+id/zhuanghutitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/zhanghulogo"
+            android:layout_marginLeft="10dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="新手指南"
+            android:textColor="#101010"
+            android:layout_toRightOf="@+id/zhanghulogo"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/zhuanghutitle"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/zhanghulogo"
+            android:text="熟悉操作方法，快速购票"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="11sp" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="10dp"
+            android:scaleType="center"
+            android:src="@drawable/gengduo" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="@color/lightgrey"/>
+    <RelativeLayout
+        android:id="@+id/mapsetting"
+        android:layout_width="match_parent"
+        android:clickable="true"
+        android:background="@drawable/selector"
+        android:layout_height="60dp">
+        <ImageView
+            android:id="@+id/maplogo"
+            android:layout_marginTop="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/guize" />
+
+        <TextView
+            android:id="@+id/maptitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/maplogo"
+            android:layout_marginLeft="10dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="购票，退票规则"
+            android:textColor="#101010"
+            android:layout_toRightOf="@+id/maplogo"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/maptitle"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/maplogo"
+            android:text="方便旅客及时购票退票"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="11sp" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="10dp"
+            android:scaleType="center"
+            android:src="@drawable/gengduo" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="@color/lightgrey"/>
+    <RelativeLayout
+        android:id="@+id/versionupdate"
+        android:layout_width="match_parent"
+        android:clickable="true"
+        android:background="@drawable/selector"
+        android:layout_height="60dp">
+        <ImageView
+            android:id="@+id/versionlogo"
+            android:layout_marginTop="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/update" />
+
+        <TextView
+            android:id="@+id/versiontitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/versionlogo"
+            android:layout_marginLeft="10dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="版本更新"
+            android:textColor="#101010"
+            android:layout_toRightOf="@+id/versionlogo"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/versiontitle"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/versionlogo"
+            android:text="检查是否有最新版本"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="11sp" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="10dp"
+            android:scaleType="center"
+            android:src="@drawable/gengduo" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="@color/lightgrey"/>
+    <RelativeLayout
+        android:id="@+id/zhuxiaodenglu"
+        android:layout_width="match_parent"
+        android:clickable="true"
+        android:background="@drawable/selector"
+        android:layout_height="60dp">
+        <ImageView
+            android:id="@+id/zhuxiaologo"
+            android:layout_marginTop="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/guanyuwomen" />
+
+        <TextView
+            android:id="@+id/zhuxiaotitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/zhuxiaologo"
+            android:layout_marginLeft="10dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="关于我们"
+            android:textColor="#101010"
+            android:layout_toRightOf="@+id/zhuxiaologo"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/zhuxiaotitle"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/zhuxiaologo"
+            android:text="我们的联系方式，方便沟通"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="11sp" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="8dp"
+            android:scaleType="center"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/gengduo" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="@color/lightgrey"/>
+    <RelativeLayout
+        android:id="@+id/shiyongxieyi"
+        android:layout_width="match_parent"
+        android:clickable="true"
+        android:background="@drawable/selector"
+        android:layout_height="60dp">
+        <ImageView
+            android:id="@+id/shiyongxieyilogo"
+            android:layout_marginTop="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/shiyongxieyi" />
+
+        <TextView
+            android:id="@+id/shiyongxieyititle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/shiyongxieyilogo"
+            android:layout_marginLeft="10dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="使用协议"
+            android:textColor="#101010"
+            android:layout_toRightOf="@+id/shiyongxieyilogo"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/shiyongxieyititle"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/shiyongxieyilogo"
+            android:text="使用的条款协议"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="11sp" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="8dp"
+            android:scaleType="center"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/gengduo" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="@color/lightgrey"/>
+</LinearLayout>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white">
+
+            <com.jude.rollviewpager.RollPagerView
+                android:id="@+id/roll_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:rollviewpager_play_delay="3000"
+                app:rollviewpager_hint_paddingBottom="8dp"/>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:orientation="horizontal"
+                android:background="@color/lightgrey">
+
+                <LinearLayout
+                    android:id="@+id/xiaochefuwull"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0.1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="校车服务"
+                        android:drawableTop="@drawable/schoolbus"
+                        android:drawablePadding="15dp"
+                        android:textColor="@color/color_hint_text"
+                        android:textSize="13dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/banxianbanchell"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0.1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="班线班车"
+                        android:drawableTop="@drawable/mybaoche"
+                        android:drawablePadding="15dp"
+                        android:textColor="@color/color_hint_text"
+                        android:textSize="13dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/xiaojianwuliull"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0.1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="小件物流"
+                        android:drawableTop="@drawable/xiaojianwuliu"
+                        android:drawablePadding="15dp"
+                        android:textColor="@color/color_hint_text"
+                        android:textSize="13dp"  />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:orientation="horizontal"
+                android:background="@color/lightgrey">
+
+                <LinearLayout
+                    android:id="@+id/zhoumobanchell"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0.1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="周末班车"
+                        android:drawableTop="@drawable/zhoumoche"
+                        android:drawablePadding="15dp"
+                        android:textColor="@color/color_hint_text"
+                        android:textSize="13dp"  />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/zhidachell"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0.1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="直达车"
+                        android:drawableTop="@drawable/zhitongche"
+                        android:drawablePadding="15dp"
+                        android:textColor="@color/color_hint_text"
+                        android:textSize="13dp"  />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/dingzhibusll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0.1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="定制公交"
+                        android:drawableTop="@drawable/uber"
+                        android:drawablePadding="15dp"
+                        android:textColor="@color/color_hint_text"
+                        android:textSize="13dp" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:orientation="horizontal"
+                android:background="@color/lightgrey">
+
+                <LinearLayout
+                    android:id="@+id/lvyoubusll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="0.1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="旅游包车"
+                        android:drawableTop="@mipmap/travel"
+                        android:drawablePadding="15dp"
+                        android:textColor="@color/color_hint_text"
+                        android:textSize="13dp"  />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginTop="0.1dp"
+                    android:background="@color/white"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                   >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="直通车"
+                        android:drawableTop="@drawable/zhitongche"
+                        android:drawablePadding="15dp"
+                        android:textColor="@color/color_hint_text"
+                        android:textSize="13dp"
+                        android:visibility="invisible"/>
+                </LinearLayout>
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginTop="0.1dp"
+                    android:background="@color/white"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                   >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="定制公交"
+                        android:drawableTop="@drawable/uber"
+                        android:drawablePadding="15dp"
+                        android:textColor="@color/color_hint_text"
+                        android:textSize="13dp"
+                        android:visibility="invisible"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
