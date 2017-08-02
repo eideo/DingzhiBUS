@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -21,8 +22,9 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.baidu.mapapi.model.LatLng;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
+import com.lzy.okhttputils.OkHttpUtils;
+import com.lzy.okhttputils.callback.StringCallback;
+
 
 import chenfei.com.base.ApiInterface;
 import chenfei.com.base.BaseActivity;
@@ -35,6 +37,8 @@ import chenfei.com.utils.Md5Utils;
 import chenfei.com.utils.SPUtils;
 import chenfei.com.utils.ToastUtils;
 import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class PaySelectAcitivity extends BaseActivity {
 	private Context context = this;
@@ -115,25 +119,22 @@ public class PaySelectAcitivity extends BaseActivity {
 	private void submitProcess(DrtorderItem item) {
 		DialogHelper.showLoadingDialog(this);
 		OkHttpUtils
-				.get()
-		.addParams("orderid", getOutTradeNo())
-		.addParams("lineid", item.lineid)
-		.addParams("userid", item.userid)
-		.addParams("startstop", item.startstop)
-		.addParams("endstop", item.endstop)
-		.addParams("upstop", item.upstop)
-		.addParams("downstop", item.downstop)
-		.addParams("distance", item.distance)
-		.addParams("runtime", item.runtime)
-		.addParams("paymoney", item.paymoney)
-		.addParams("buytype", item.buytype)
-		.addParams("city", item.city)
-
-				.url(ApiInterface.Savedrtorder)
-				.build()
+				.get(ApiInterface.Savedrtorder)
+		.params("orderid", getOutTradeNo())
+		.params("lineid", item.lineid)
+		.params("userid", item.userid)
+		.params("startstop", item.startstop)
+		.params("endstop", item.endstop)
+		.params("upstop", item.upstop)
+		.params("downstop", item.downstop)
+		.params("distance", item.distance)
+		.params("runtime", item.runtime)
+		.params("paymoney", item.paymoney)
+		.params("buytype", item.buytype)
+		.params("city", item.city)
 				.execute(new StringCallback() {
 					@Override
-					public void onResponse(String jsonstring) {
+					public void onResponse(boolean isFromCache, String jsonstring, Request request, @Nullable Response response) {
 						DialogHelper.dismissLoadingDialog();
 						if (jsonstring == null || jsonstring.equals("")) {
 							Toast.makeText(getApplicationContext(), "订单提交失败",
@@ -164,7 +165,8 @@ public class PaySelectAcitivity extends BaseActivity {
 					}
 
 					@Override
-					public void onError(Call arg0, Exception arg1) {
+					public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
+						super.onError(isFromCache, call, response, e);
 						// TODO Auto-generated method stub
 						ToastUtils.showLong(PaySelectAcitivity.this, "订单提交失败");
 					}

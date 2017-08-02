@@ -10,12 +10,17 @@ import chenfei.com.utils.Md5Utils;
 import chenfei.com.utils.NetUtils;
 import chenfei.com.utils.ToastUtils;
 import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
+
 import com.alibaba.fastjson.JSON;
 import com.baidu.mapapi.model.LatLng;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
+import com.lzy.okhttputils.OkHttpUtils;
+import com.lzy.okhttputils.callback.StringCallback;
+
 import android.os.Bundle;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -75,14 +80,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void loginProcess(final String name, final String psd) {
 
         OkHttpUtils
-                .get()
-                .addParams("loginid", name)
-                .addParams("loginpass", Md5Utils.encode(psd))
-                .url(ApiInterface.AccountLogin)
-                .build()
+                .post(ApiInterface.AccountLogin)
+                .params("loginid", name)
+                .params("loginpass", Md5Utils.encode(psd))
                 .execute(new StringCallback() {
                     @Override
-                    public void onResponse(String jsonstring) {
+                    public void onResponse(boolean isFromCache, String jsonstring, Request request, @Nullable Response response) {
                         DialogHelper.dismissLoadingDialog();
                         if (jsonstring == null || jsonstring.equals("")) {
                             ToastUtils.showLong(LoginActivity.this, "登录失败，请检查账号密码");
@@ -128,11 +131,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             e.printStackTrace();
                             return;
                         }
-
                     }
-
                     @Override
-                    public void onError(Call arg0, Exception arg1) {
+                    public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
+                        super.onError(isFromCache, call, response, e);
                         // TODO Auto-generated method stub
                         ToastUtils.showLong(LoginActivity.this, "登录失败，请检查权限");
                     }

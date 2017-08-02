@@ -3,6 +3,7 @@ package chenfei.com.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -10,8 +11,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
+
+import com.lzy.okhttputils.OkHttpUtils;
+import com.lzy.okhttputils.callback.StringCallback;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import chenfei.com.base.ApiInterface;
@@ -22,6 +25,8 @@ import chenfei.com.utils.DialogHelper;
 import chenfei.com.utils.Md5Utils;
 import chenfei.com.utils.ToastUtils;
 import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
     private EditText mUser; // 帐号编辑框
@@ -102,16 +107,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         // TODO Auto-generated method stub
         DialogHelper.showLoadingDialog(context, "注册中...");
         OkHttpUtils
-                .get()
-                .addParams("muser", muser)
-                .addParams("mpassword", mpassword)
-                .addParams("telephone", telephone)
-                .addParams("sex", sex)
-                .url(ApiInterface.AccountRegister)
-                .build()
+                .get(ApiInterface.AccountRegister)
+                .params("muser", muser)
+                .params("mpassword", mpassword)
+                .params("telephone", telephone)
+                .params("sex", sex)
                 .execute(new StringCallback() {
                     @Override
-                    public void onResponse(String jsonstring) {
+                    public void onResponse(boolean isFromCache, String jsonstring, Request request, @Nullable Response response) {
                         DialogHelper.dismissLoadingDialog();
                         if (jsonstring == null || jsonstring.equals("")) {
                             ToastUtils.showLong(RegisterActivity.this, "注册失败，请检查网络");
@@ -144,7 +147,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     }
 
                     @Override
-                    public void onError(Call arg0, Exception arg1) {
+                    public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
+                        super.onError(isFromCache, call, response, e);
                         // TODO Auto-generated method stub
                         DialogHelper.dismissLoadingDialog();
                         ToastUtils.showLong(RegisterActivity.this, "注册失败，请检查网络");

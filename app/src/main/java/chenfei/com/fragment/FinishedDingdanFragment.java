@@ -20,6 +20,7 @@ package chenfei.com.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,8 +31,8 @@ import android.view.ViewGroup;
 
 import com.alibaba.fastjson.JSON;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
+import com.lzy.okhttputils.OkHttpUtils;
+import com.lzy.okhttputils.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,8 @@ import chenfei.com.utils.DialogHelper;
 import chenfei.com.utils.SPUtils;
 import chenfei.com.utils.ToastUtils;
 import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by Iiro Krankka (http://github.com/roughike)
@@ -91,19 +94,18 @@ public class FinishedDingdanFragment extends Fragment implements BaseQuickAdapte
 
     @Override
     public void onRefresh() {
-        OkHttpUtils.get()
-                .addParams("userid", (String) SPUtils.get(getActivity(),"userid",""))
-                .url(ApiInterface.Getmyorderlist)     // 请求方式和请求url
-                .build()
+        OkHttpUtils.get(ApiInterface.Getmyorderlist)
+                .params("userid", (String) SPUtils.get(getActivity(),"userid",""))
                 .execute(new StringCallback() {
                     @Override
-                    public void onError(Call call, Exception e) {
+                    public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
+                        super.onError(isFromCache, call, response, e);
                         DialogHelper.dismissLoadingDialog();
                         ToastUtils.showLong(getActivity(), e.getMessage());
                     }
 
                     @Override
-                    public void onResponse(String s) {
+                    public void onResponse(boolean isFromCache, String s, Request request, @Nullable Response response) {
                         DialogHelper.dismissLoadingDialog();
                         MyOrderInfo myorderinfo=new MyOrderInfo();
                         myorderinfo=JSON.parseObject(s,MyOrderInfo.class);
@@ -168,19 +170,18 @@ public class FinishedDingdanFragment extends Fragment implements BaseQuickAdapte
     }
 
     private void GetDaibanList() {
-        OkHttpUtils.get()
-                .addParams("userid", (String) SPUtils.get(getActivity(),"userid",""))
-                .url(ApiInterface.Getmyorderlist)     // 请求方式和请求url
-                .build()
+        OkHttpUtils.get(ApiInterface.Getmyorderlist)
+                .params("userid", (String) SPUtils.get(getActivity(),"userid",""))
                 .execute(new StringCallback() {
                     @Override
-                    public void onError(Call call, Exception e) {
+                    public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
+                        super.onError(isFromCache, call, response, e);
                         DialogHelper.dismissLoadingDialog();
                         ToastUtils.showLong(getActivity(), e.getMessage());
                     }
 
                     @Override
-                    public void onResponse(String s) {
+                    public void onResponse(boolean isFromCache, String s, Request request, @Nullable Response response) {
                         DialogHelper.dismissLoadingDialog();
                         MyOrderInfo myorderinfo=new MyOrderInfo();
                         myorderinfo=JSON.parseObject(s,MyOrderInfo.class);

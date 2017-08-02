@@ -194,7 +194,7 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="40dp"
                 android:background="@drawable/smssdk_btn_enable"
-                android:text="提交"
+                android:text="提交订单"
                 android:textColor="#ffffff"
                 android:textSize="18sp" />
         </LinearLayout>

@@ -38,6 +38,7 @@ import org.xutils.DbManager;
 
 import chenfei.com.activity.DingzhiBusActivity;
 import chenfei.com.activity.MainActivity;
+import chenfei.com.activity.NearlinesAcitivity;
 import chenfei.com.base.R;
 import chenfei.com.home.SchoolBusActivity;
 
@@ -98,6 +99,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), SchoolBusActivity.class));
                 break;
             case R.id.banxianbanchell:
+                startActivity(new Intent(getActivity(), NearlinesAcitivity.class));
                 break;
             case R.id.xiaojianwuliull:
                 break;

@@ -118,7 +118,6 @@ public class NearlinesAcitivity extends BaseActivity{
 				case 0:
 					if (runningLineFragment == null) {
 						runningLineFragment = new RunningLineFragment();
-
 					}
 					return runningLineFragment;
 				case 1:

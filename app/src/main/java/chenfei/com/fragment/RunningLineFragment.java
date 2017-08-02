@@ -34,8 +34,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.alibaba.fastjson.JSON;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
+import com.lzy.okhttputils.OkHttpUtils;
+import com.lzy.okhttputils.callback.StringCallback;
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -65,10 +66,10 @@ public class RunningLineFragment extends Fragment implements BaseQuickAdapter.Re
     private RunningLinelistadapter madpter;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private  int TOTAL_COUNTER = 1000;
-    private static final int PAGE_SIZE = 10;
+    private static final int PAGE_SIZE = 30;
     private int delayMillis = 1000;
     private int mCurrentCounter = 0;
-    private List<GetLinesInfo.DataBean> mData;
+    private List<GetLinesInfo.DataBean> mDatas =new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -82,7 +83,8 @@ public class RunningLineFragment extends Fragment implements BaseQuickAdapter.Re
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         super.onCreateView(inflater, container, savedInstanceState);
         runningfragment.forceLayout();
-
+        initAdapter();
+        GetDaibanList();
         //缓存的rootView需要判断是否已经被加过parent， 如果有parent需要从parent删除，要不然会发生这个rootview已经有parent的错误。
         ViewGroup parent = (ViewGroup) runningfragment.getParent();
         if (parent != null) {
@@ -93,37 +95,32 @@ public class RunningLineFragment extends Fragment implements BaseQuickAdapter.Re
 
 
     @Override
-    public void onResume() {
-        super.onResume();
-        GetDaibanList();
-    }
-
-    @Override
     public void onRefresh() {
-        OkHttpUtils.get()
-                .addParams("type", "0")
-                .url(ApiInterface.Getlinelists)     // 请求方式和请求url
-                .build()
+        OkHttpUtils.post(ApiInterface.Getlinelists)     // 请求方式和请求url
+                .tag(this)                       // 请求的 tag, 主要用于取消对应的请求
+                .params("type", "0")//
                 .execute(new StringCallback() {
                     @Override
-                    public void onError(Call call, Exception e) {
+                    public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
+                        super.onError(isFromCache, call, response, e);
                         DialogHelper.dismissLoadingDialog();
                         ToastUtils.showLong(getActivity(), e.getMessage());
                     }
 
                     @Override
-                    public void onResponse(String s) {
+                    public void onResponse(boolean isFromCache, String s, Request request, @Nullable Response response) {
                         DialogHelper.dismissLoadingDialog();
-                        GetLinesInfo mgetlinesinfo=new GetLinesInfo();
-                        mgetlinesinfo=JSON.parseObject(s,GetLinesInfo.class);
-                        mData = new ArrayList<GetLinesInfo.DataBean>();
-                        mData = mgetlinesinfo.getData();
-                   //     TOTAL_COUNTER=mData.size();
-                        initAdapter();
-                        mRecyclerView.setAdapter(madpter);
+                        mDatas.clear();
+                        GetLinesInfo  mgetlinesinfo=JSON.parseObject(s,GetLinesInfo.class);
+                        if (mgetlinesinfo.getUrlflag().equals("success")) {
+                            mDatas.addAll(mgetlinesinfo.getData());
+                            TOTAL_COUNTER = mDatas.size();
+                            madpter.notifyDataSetChanged();
+                        }
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });
-        mSwipeRefreshLayout.setRefreshing(false);
+
     }
 
     @Override
@@ -139,7 +136,7 @@ public class RunningLineFragment extends Fragment implements BaseQuickAdapter.Re
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            madpter.notifyDataChangedAfterLoadMore(getData(mData, PAGE_SIZE), true);
+                            madpter.notifyDataChangedAfterLoadMore(getData(mDatas, PAGE_SIZE), true);
                             mCurrentCounter = madpter.getData().size();
                         }
                     }, delayMillis);
@@ -151,9 +148,8 @@ public class RunningLineFragment extends Fragment implements BaseQuickAdapter.Re
     }
 
     private void initAdapter() {
-        madpter = new RunningLinelistadapter(getActivity(), R.layout.runninglineitem, mData, PAGE_SIZE);
+        madpter = new RunningLinelistadapter(getActivity(), R.layout.runninglineitem, mDatas, PAGE_SIZE);
         madpter.openLoadAnimation();
-        mRecyclerView.setAdapter(madpter);
         mCurrentCounter = madpter.getData().size();
         madpter.setOnLoadMoreListener(this);
         madpter.openLoadMore(PAGE_SIZE, true);//or call mQuickAdapter.setPageSize(PAGE_SIZE);  mQuickAdapter.openLoadMore(true);
@@ -162,6 +158,7 @@ public class RunningLineFragment extends Fragment implements BaseQuickAdapter.Re
             public void onItemClick(View view, int position) {
             }
         });
+        mRecyclerView.setAdapter(madpter);
     }
 
     public static List<GetLinesInfo.DataBean> getData(List<GetLinesInfo.DataBean> data, int dataSize) {
@@ -177,27 +174,27 @@ public class RunningLineFragment extends Fragment implements BaseQuickAdapter.Re
     }
 
     private void GetDaibanList() {
-        OkHttpUtils.get()
-                .addParams("type", "0")
-                .url(ApiInterface.Getlinelists)     // 请求方式和请求url
-                .build()
+        OkHttpUtils.post(ApiInterface.Getlinelists)     // 请求方式和请求url
+                .tag(this)                       // 请求的 tag, 主要用于取消对应的请求
+                .params("type", "0")//
                 .execute(new StringCallback() {
                     @Override
-                    public void onError(Call call, Exception e) {
+                    public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
+                        super.onError(isFromCache, call, response, e);
                         DialogHelper.dismissLoadingDialog();
                         ToastUtils.showLong(getActivity(), e.getMessage());
                     }
 
                     @Override
-                    public void onResponse(String s) {
+                    public void onResponse(boolean isFromCache, String s, Request request, @Nullable Response response) {
                         DialogHelper.dismissLoadingDialog();
-                        GetLinesInfo mgetlinesinfo=new GetLinesInfo();
-                        mgetlinesinfo=JSON.parseObject(s,GetLinesInfo.class);
-                        mData = new ArrayList<GetLinesInfo.DataBean>();
-                        TOTAL_COUNTER=mData.size();
-                        mData = mgetlinesinfo.getData();
-                        initAdapter();
-                        mRecyclerView.setAdapter(madpter);
+                        mDatas.clear();
+                        GetLinesInfo  mgetlinesinfo=JSON.parseObject(s,GetLinesInfo.class);
+                        if (mgetlinesinfo.getUrlflag().equals("success")) {
+                            mDatas.addAll(mgetlinesinfo.getData());
+                            TOTAL_COUNTER = mDatas.size();
+                            madpter.notifyDataSetChanged();
+                        }
                     }
                 });
     }

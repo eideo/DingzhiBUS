@@ -100,6 +100,7 @@
             android:screenOrientation="portrait" ></activity>
         <activity android:name="chenfei.com.home.SchoolBusActivity"
             android:configChanges="screenSize|orientation|keyboardHidden"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait" ></activity>
     </application>
 

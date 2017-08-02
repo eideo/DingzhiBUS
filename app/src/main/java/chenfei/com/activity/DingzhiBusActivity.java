@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -57,8 +58,9 @@ import com.baidu.mapapi.search.geocode.ReverseGeoCodeOption;
 import com.baidu.mapapi.search.geocode.ReverseGeoCodeResult;
 import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
 import com.baidu.mapapi.search.sug.SuggestionResult;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
+import com.lzy.okhttputils.OkHttpUtils;
+import com.lzy.okhttputils.callback.StringCallback;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -75,6 +77,8 @@ import chenfei.com.utils.DialogHelper;
 import chenfei.com.utils.SPUtils;
 import chenfei.com.utils.ToastUtils;
 import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class DingzhiBusActivity extends BaseActivity implements CloudListener,
         OnGetSuggestionResultListener, OnClickListener {
@@ -476,24 +480,24 @@ public class DingzhiBusActivity extends BaseActivity implements CloudListener,
 
     private void SerchProcess(String startpoint, final String endpoint) {
         DialogHelper.showLoadingDialog(DingzhiBusActivity.this, "正在计算路线...");
-        OkHttpUtils.post()
-                .url(ApiInterface.Getdrtlinelists)     // 请求方式和请求url
+        OkHttpUtils.post(ApiInterface.Getdrtlinelists)
+                 // 请求方式和请求url
                 .tag(DingzhiBusActivity.this)
-                .addParams("startpoint", startpoint)
-                .addParams("endpoint", endpoint)
-                .build()
+                .params("startpoint", startpoint)
+                .params("endpoint", endpoint)
                 // 请求的 tag, 主要用于取消对应的请求
                 .execute(new StringCallback() {
 
                     @Override
-                    public void onError(Call call, Exception e) {
+                    public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
+                        super.onError(isFromCache, call, response, e);
                         DialogHelper.dismissLoadingDialog();
                         ToastUtils.showLong(DingzhiBusActivity.this, "计算失败，请检查网络。。。");
 
                     }
 
                     @Override
-                    public void onResponse(String jsonstring) {
+                    public void onResponse(boolean isFromCache, String jsonstring, Request request, @Nullable Response response) {
                         DialogHelper.dismissLoadingDialog();
                         if (jsonstring == null || jsonstring.equals("")) {
                             ToastUtils.showLong(DingzhiBusActivity.this, "计算失败，服务器返回出错。。。");
@@ -748,23 +752,22 @@ public class DingzhiBusActivity extends BaseActivity implements CloudListener,
 
         // String curversion = getResources().getString(R.string.app_version);
         DialogHelper.showLoadingDialog(DingzhiBusActivity.this, "正在计算中...");
-        OkHttpUtils.post()
+        OkHttpUtils.post(ApiInterface.Calculatorlinedistance)
                 .url(ApiInterface.Calculatorlinedistance)     // 请求方式和请求url
-                .tag(DingzhiBusActivity.this)
-                .addParams("points", poinString)
-                .build()
+                .params("points", poinString)
                 // 请求的 tag, 主要用于取消对应的请求
                 .execute(new StringCallback() {
 
                     @Override
-                    public void onError(Call call, Exception e) {
+                    public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
+                        super.onError(isFromCache, call, response, e);
                         DialogHelper.dismissLoadingDialog();
                         ToastUtils.showLong(DingzhiBusActivity.this, "提交失败，请检查网络。。。");
 
                     }
 
                     @Override
-                    public void onResponse(String jsonstring) {
+                    public void onResponse(boolean isFromCache, String jsonstring, Request request, @Nullable Response response) {
                         DialogHelper.dismissLoadingDialog();
                         if (jsonstring == null || jsonstring.equals("")) {
                             calculatorflag = "failed";
@@ -821,32 +824,31 @@ public class DingzhiBusActivity extends BaseActivity implements CloudListener,
                                      String startstop, String endstop, String upstop, String downstop,
                                      String distance, String runtime, String paymoney, String city) {
         DialogHelper.showLoadingDialog(DingzhiBusActivity.this, "提交中...");
-        OkHttpUtils.post()
-                .url(ApiInterface.Calculatorlinedistance)     // 请求方式和请求url
+        OkHttpUtils.post(ApiInterface.Calculatorlinedistance)
                 .tag(DingzhiBusActivity.this)
-                .addParams("lineid", lineid)
-                .addParams("userid", userid)
-                .addParams("startstop", startstop)
-                .addParams("endstop", endstop)
-                .addParams("upstop", upstop)
-                .addParams("downstop", downstop)
-                .addParams("distance", distance)
-                .addParams("runtime", runtime)
-                .addParams("paymoney", paymoney)
-                .addParams("city", city)
-                .build()
+                .params("lineid", lineid)
+                .params("userid", userid)
+                .params("startstop", startstop)
+                .params("endstop", endstop)
+                .params("upstop", upstop)
+                .params("downstop", downstop)
+                .params("distance", distance)
+                .params("runtime", runtime)
+                .params("paymoney", paymoney)
+                .params("city", city)
                 // 请求的 tag, 主要用于取消对应的请求
                 .execute(new StringCallback() {
 
                     @Override
-                    public void onError(Call call, Exception e) {
+                    public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
+                        super.onError(isFromCache, call, response, e);
                         DialogHelper.dismissLoadingDialog();
                         ToastUtils.showLong(DingzhiBusActivity.this, "提交失败，请检查网络。。。");
 
                     }
 
                     @Override
-                    public void onResponse(String jsonstring) {
+                    public void onResponse(boolean isFromCache, String jsonstring, Request request, @Nullable Response response) {
                         DialogHelper.dismissLoadingDialog();
                         if (jsonstring == null || jsonstring.equals("")) {
                             Toast.makeText(getApplicationContext(), "收藏失败",
@@ -874,28 +876,28 @@ public class DingzhiBusActivity extends BaseActivity implements CloudListener,
 
     private void UpdateuserinformationProcess() {
         DialogHelper.showLoadingDialog(DingzhiBusActivity.this, "提交中...");
-        OkHttpUtils.post()
-                .url(ApiInterface.Updateuserinformation)     // 请求方式和请求url
+        OkHttpUtils.post(ApiInterface.Updateuserinformation)
+                // 请求方式和请求url
                 .tag(DingzhiBusActivity.this)
-                .addParams("telephone", (String) SPUtils.get(DingzhiBusActivity.this, "telephone", ""))
-                .addParams("homeaddress", (String) SPUtils.get(DingzhiBusActivity.this, "homeaddress", ""))
-                .addParams("companyaddress", (String) SPUtils.get(DingzhiBusActivity.this, "companyaddress", ""))
-                .addParams("email", (String) SPUtils.get(DingzhiBusActivity.this, "email", ""))
-                .addParams("homelngstr", (String) SPUtils.get(DingzhiBusActivity.this, "homelngstr", ""))
-                .addParams("companylngstr", (String) SPUtils.get(DingzhiBusActivity.this, "companylngstr", ""))
-                .build()
+                .params("telephone", (String) SPUtils.get(DingzhiBusActivity.this, "telephone", ""))
+                .params("homeaddress", (String) SPUtils.get(DingzhiBusActivity.this, "homeaddress", ""))
+                .params("companyaddress", (String) SPUtils.get(DingzhiBusActivity.this, "companyaddress", ""))
+                .params("email", (String) SPUtils.get(DingzhiBusActivity.this, "email", ""))
+                .params("homelngstr", (String) SPUtils.get(DingzhiBusActivity.this, "homelngstr", ""))
+                .params("companylngstr", (String) SPUtils.get(DingzhiBusActivity.this, "companylngstr", ""))
                 // 请求的 tag, 主要用于取消对应的请求
                 .execute(new StringCallback() {
 
                     @Override
-                    public void onError(Call call, Exception e) {
+                    public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
+                        super.onError(isFromCache, call, response, e);
                         DialogHelper.dismissLoadingDialog();
                         ToastUtils.showLong(DingzhiBusActivity.this, "提交失败，请检查网络。。。");
 
                     }
 
                     @Override
-                    public void onResponse(String jsonstring) {
+                    public void onResponse(boolean isFromCache, String jsonstring, Request request, @Nullable Response response) {
                         DialogHelper.dismissLoadingDialog();
                         if (jsonstring == null || jsonstring.equals("")) {
                             ToastUtils.showLong(DingzhiBusActivity.this, "保存用户信息失败");
@@ -1001,23 +1003,23 @@ public class DingzhiBusActivity extends BaseActivity implements CloudListener,
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
-                    OkHttpUtils.post()
-                            .url(ApiInterface.Getdrtbuszuobiao)     // 请求方式和请求url
+                    OkHttpUtils.post(ApiInterface.Getdrtbuszuobiao)
+                            // 请求方式和请求url
                             .tag(DingzhiBusActivity.this)
-                            .addParams("lineid", lineid)
-                            .build()
+                            .params("lineid", lineid)
                             // 请求的 tag, 主要用于取消对应的请求
                             .execute(new StringCallback() {
 
                                 @Override
-                                public void onError(Call call, Exception e) {
+                                public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
+                                    super.onError(isFromCache, call, response, e);
                                     DialogHelper.dismissLoadingDialog();
                                     ToastUtils.showLong(DingzhiBusActivity.this, "提交失败，请检查网络。。。");
 
                                 }
 
                                 @Override
-                                public void onResponse(String jsonstring) {
+                                public void onResponse(boolean isFromCache, String jsonstring, Request request, @Nullable Response response) {
                                     try {
                                         JSONObject jsonObject = new JSONObject(jsonstring);
                                         buszuobiao = jsonObject.getString("buszuobiao");

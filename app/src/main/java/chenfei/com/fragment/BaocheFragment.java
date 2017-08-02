@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,8 +35,8 @@ import com.iflytek.cloud.SpeechError;
 import com.iflytek.cloud.SpeechRecognizer;
 import com.iflytek.cloud.ui.RecognizerDialog;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
+import com.lzy.okhttputils.OkHttpUtils;
+import com.lzy.okhttputils.callback.StringCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -57,6 +58,8 @@ import chenfei.com.utils.JsonParser;
 import chenfei.com.utils.SPUtils;
 import chenfei.com.utils.ToastUtils;
 import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * 提交包车订单的界面
@@ -620,37 +623,37 @@ public class BaocheFragment extends Fragment {
                     @Override
                     public void onBtnClick() {
                         DialogHelper.showLoadingDialog(getActivity(), "提交中...");
-                        OkHttpUtils.post()
-                                .url(ApiInterface.AddBaocheOrder)     // 请求方式和请求url
+                        OkHttpUtils.post(ApiInterface.AddBaocheOrder)
+                                  // 请求方式和请求url
                                 .tag(getActivity())
-                                .addParams("orderid", getOutTradeNo())
-                                .addParams("userid", (String) SPUtils.get(getActivity(), "userid", ""))
-                                .addParams("province", strprovince)
-                                .addParams("city", strcity)
-                                .addParams("startstop", startstop)
-                                .addParams("endstop", endstop)
-                                .addParams("startdate", startdate)
-                                .addParams("enddate", enddate)
-                                .addParams("usernum", usernum)
-                                .addParams("username", username)
-                                .addParams("usertelephone", usertelephone)
-                                .addParams("fapiao", fapiao)
-                                .addParams("beizhu", beizhu)
-                                .addParams("baochefangshi", baochefangshi)
-                                .addParams("cheling", cheling)
-                                .build()
+                                .params("orderid", getOutTradeNo())
+                                .params("userid", (String) SPUtils.get(getActivity(), "userid", ""))
+                                .params("province", strprovince)
+                                .params("city", strcity)
+                                .params("startstop", startstop)
+                                .params("endstop", endstop)
+                                .params("startdate", startdate)
+                                .params("enddate", enddate)
+                                .params("usernum", usernum)
+                                .params("username", username)
+                                .params("usertelephone", usertelephone)
+                                .params("fapiao", fapiao)
+                                .params("beizhu", beizhu)
+                                .params("baochefangshi", baochefangshi)
+                                .params("cheling", cheling)
                                 // 请求的 tag, 主要用于取消对应的请求
                                 .execute(new StringCallback() {
 
                                     @Override
-                                    public void onError(Call call, Exception e) {
+                                    public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
+                                        super.onError(isFromCache, call, response, e);
                                         DialogHelper.dismissLoadingDialog();
                                         ToastUtils.showLong(getActivity(), "提交失败，请检查网络。。。");
 
                                     }
 
                                     @Override
-                                    public void onResponse(String s) {
+                                    public void onResponse(boolean isFromCache, String s, Request request, @Nullable Response response) {
                                         DialogHelper.dismissLoadingDialog();
                                         if (s.contains("success")) {
                                             ToastUtils.showLong(getActivity(), "提交成功");

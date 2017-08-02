@@ -3,6 +3,7 @@ package chenfei.com.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
@@ -14,8 +15,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.like.LikeButton;
 import com.like.OnLikeListener;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
+import com.lzy.okhttputils.OkHttpUtils;
+import com.lzy.okhttputils.callback.StringCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +37,8 @@ import chenfei.com.utils.Md5Utils;
 import chenfei.com.utils.SPUtils;
 import chenfei.com.utils.ToastUtils;
 import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * * @author 作者 E-mail:
@@ -135,15 +138,13 @@ public class GuanfangLinelistadapter extends BaseQuickAdapter<GetLinesInfo.DataB
 	private void Doyuyue(String lineid, final String registerpersonnumnow,
 						 String registerusertelephone, final TextView tv, final boolean flag){
 		OkHttpUtils
-				.get()
-				.addParams("lineid", lineid)
-				.addParams("registerpersonnum", registerpersonnumnow)
-				.addParams("registerusertelephone", registerusertelephone)
-				.url(ApiInterface.Doyuyue)
-				.build()
+				.get(ApiInterface.Doyuyue)
+				.params("lineid", lineid)
+				.params("registerpersonnum", registerpersonnumnow)
+				.params("registerusertelephone", registerusertelephone)
 				.execute(new StringCallback() {
 					@Override
-					public void onResponse(String jsonstring) {
+					public void onResponse(boolean isFromCache, String jsonstring, Request request, @Nullable Response response) {
 						DialogHelper.dismissLoadingDialog();
 						if (jsonstring == null || jsonstring.equals("")) {
 							if (flag){
@@ -180,7 +181,8 @@ public class GuanfangLinelistadapter extends BaseQuickAdapter<GetLinesInfo.DataB
 					}
 
 					@Override
-					public void onError(Call arg0, Exception arg1) {
+					public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
+						super.onError(isFromCache, call, response, e);
 						// TODO Auto-generated method stub
 						ToastUtils.showLong(mContext, "连接失败，请重试");
 					}

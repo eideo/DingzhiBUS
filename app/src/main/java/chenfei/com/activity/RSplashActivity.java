@@ -9,12 +9,14 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.view.Window;
 import android.view.WindowManager;
 import com.alibaba.fastjson.JSON;
 import com.baidu.mapapi.model.LatLng;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
+import com.lzy.okhttputils.OkHttpUtils;
+import com.lzy.okhttputils.callback.StringCallback;
+
 import chenfei.com.base.ApiInterface;
 import chenfei.com.base.BaseActivity;
 import chenfei.com.base.MyAPP;
@@ -23,6 +25,8 @@ import chenfei.com.category.Userinfo;
 import chenfei.com.utils.SPUtils;
 import chenfei.com.utils.ToastUtils;
 import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * 实时开屏，广告实时请求并且立即展现
@@ -63,14 +67,12 @@ public class RSplashActivity extends Activity {
     private void loginProcess(final String telephone, final String password) {
 
         OkHttpUtils
-                .get()
-                .addParams("loginid", telephone)
-                .addParams("loginpass", password)
-                .url(ApiInterface.AccountLogin)
-                .build()
+                .get(ApiInterface.AccountLogin)
+                .params("loginid", telephone)
+                .params("loginpass", password)
                 .execute(new StringCallback() {
                     @Override
-                    public void onResponse(String jsonstring) {
+                    public void onResponse(boolean isFromCache, String jsonstring, Request request, @Nullable Response response) {
                         if (jsonstring == null || jsonstring.equals("")) {
                             ToastUtils.showLong(RSplashActivity.this, "登录失败，请检查账号密码");
                             Intent intent = new Intent(RSplashActivity.this,
@@ -124,7 +126,8 @@ public class RSplashActivity extends Activity {
                     }
 
                     @Override
-                    public void onError(Call arg0, Exception arg1) {
+                    public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
+                        super.onError(isFromCache, call, response, e);
                         // TODO Auto-generated method stub
                         Intent intent = new Intent(RSplashActivity.this,
                                 LoginActivity.class);

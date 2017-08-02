@@ -52,7 +52,6 @@ dependencies {
     //正在加载的动画
     compile 'com.github.jd-alexander:LikeButton:0.2.0'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v1.8.8'
-    compile files('libs/okhttp-3.3.0.jar')
     compile files('libs/baidumapapi_base_v4_0_0.jar')
     compile files('libs/baidumapapi_cloud_v4_0_0.jar')
     compile files('libs/baidumapapi_map_v4_0_0.jar')
@@ -66,6 +65,9 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.2.1'
     apt 'com.jakewharton:butterknife-compiler:8.2.1'//增加这一句
     compile 'com.contrarywind:Android-PickerView:3.2.5'
+    compile 'com.lzy.net:okhttputils:1.7.2'
+    //可以单独使用，不需要依赖下方的扩展包
+    compile 'com.lzy.net:okhttpserver:1.0.1'
 }
 allprojects {
     repositories {

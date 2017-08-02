@@ -1,11 +1,12 @@
 package chenfei.com.home;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.EditText;
 
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
+import com.lzy.okhttputils.OkHttpUtils;
+import com.lzy.okhttputils.callback.StringCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,6 +20,8 @@ import chenfei.com.base.R;
 import chenfei.com.utils.DialogHelper;
 import chenfei.com.utils.ToastUtils;
 import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Created by Administrator on 2017/7/31.
@@ -77,17 +80,15 @@ public class SchoolBusActivity extends BaseActivity {
         }
 
         OkHttpUtils
-                .get()
-                .addParams("schoolname", schoolname)
-                .addParams("studentnum",studentnum )
-                .addParams("lianxiren",lianxiren )
-                .addParams("lianxidianhua",lianxidianhua )
-                .addParams("beizhu",beizhu )
-                .url(ApiInterface.SubmitSchoolbus)
-                .build()
+                .get(ApiInterface.SubmitSchoolbus)
+                .params("schoolname", schoolname)
+                .params("studentnum",studentnum )
+                .params("lianxiren",lianxiren )
+                .params("lianxidianhua",lianxidianhua )
+                .params("beizhu",beizhu )
                 .execute(new StringCallback() {
                     @Override
-                    public void onResponse(String jsonstring) {
+                    public void onResponse(boolean isFromCache, String jsonstring, Request request, @Nullable Response response) {
                         DialogHelper.dismissLoadingDialog();
                         if (jsonstring == null || jsonstring.equals("")) {
                             ToastUtils.showLong(SchoolBusActivity.this, "提交失败");
@@ -108,7 +109,8 @@ public class SchoolBusActivity extends BaseActivity {
                     }
 
                     @Override
-                    public void onError(Call arg0, Exception arg1) {
+                    public void onError(boolean isFromCache, Call call, @Nullable Response response, @Nullable Exception e) {
+                        super.onError(isFromCache, call, response, e);
                         // TODO Auto-generated method stub
                         ToastUtils.showLong(SchoolBusActivity.this, "连接失败");
                     }

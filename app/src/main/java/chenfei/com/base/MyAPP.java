@@ -3,6 +3,8 @@ package chenfei.com.base;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.model.LatLng;
 import com.iflytek.cloud.SpeechUtility;
+import com.lzy.okhttputils.OkHttpUtils;
+import com.lzy.okhttputils.cookie.store.PersistentCookieStore;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -11,9 +13,6 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageSize;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.log.LoggerInterceptor;
-
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -22,12 +21,18 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
 import android.os.Message;
+import android.util.Config;
 import android.view.WindowManager;
 import org.xutils.DbManager;
 import org.xutils.x;
 import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class MyAPP extends Application {
 
@@ -53,13 +58,16 @@ public class MyAPP extends Application {
         SDKInitializer.initialize(this);
         SpeechUtility.createUtility(ycapp, "appid=" + getString(R.string.app_id));
         //初始化
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addInterceptor(new LoggerInterceptor("rq"))
-                .connectTimeout(10000L, TimeUnit.MILLISECONDS)
-                .readTimeout(10000L, TimeUnit.MILLISECONDS)
-                //其他配置
-                .build();
-        OkHttpUtils.initClient(okHttpClient);
+        OkHttpUtils.init(this);
+        //以下都不是必须的，根据需要自行选择
+        OkHttpUtils.getInstance()//
+                .debug("OkHttpUtils")                                              //是否打开调试
+                .setConnectTimeout(20000)               //全局的连接超时时间
+                .setReadTimeOut(20000)                  //全局的读取超时时间
+                .setWriteTimeOut(20000)                 //全局的写入超时时间
+                .addInterceptor(new RetryIntercepter())
+//                .setCookieStore(new MemoryCookieStore())                           //cookie使用内存缓存（app退出后，cookie消失）
+                .setCookieStore(new PersistentCookieStore());
         x.Ext.init(this);
         daoConfig = new DbManager.DaoConfig()
                 .setDbName("ququfilm.db")
@@ -142,5 +150,23 @@ public class MyAPP extends Application {
                 .getSystemService(Context.WINDOW_SERVICE);
         int height = wm.getDefaultDisplay().getHeight();
         return height;
+    }
+    public class RetryIntercepter implements Interceptor {
+
+        public int maxRetryCount = 3;
+        private int retryCount = 0;
+
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Request request = chain.request();
+            Response response = chain.proceed(request);
+            while (!response.isSuccessful() && retryCount < maxRetryCount) {
+                retryCount++;
+                response = chain.proceed(request);
+            }
+
+            return response;
+        }
+
     }
 }
