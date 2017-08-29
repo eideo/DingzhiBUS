@@ -55,5 +55,7 @@ public class AppUtils {
         }
         return null;
     }
-
+    public static boolean isNotNullOrEmpty(String inString) {
+        return inString != null && !inString.equals("") && inString.length() > 0;
+    }
 }

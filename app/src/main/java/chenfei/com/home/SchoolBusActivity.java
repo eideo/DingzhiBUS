@@ -55,29 +55,29 @@ public class SchoolBusActivity extends BaseActivity {
 
         String schoolname = schoolnameEdit.getText().toString();
         if(TextUtils.isEmpty(schoolname)){
-            ToastUtils.showShort(this, schoolnameEdit.getHint());
+            ToastUtils.showShort(this, "请输入学校名称");
             return;
         }
         String studentnum = schoolnumEdit.getText().toString();
         if(TextUtils.isEmpty(studentnum)){
-            ToastUtils.showShort(this, schoolnumEdit.getHint());
+            ToastUtils.showShort(this, "请输入乘车人数");
             return;
         }
         String lianxiren = loginUserEdit.getText().toString();
         if(TextUtils.isEmpty(lianxiren)){
-            ToastUtils.showShort(this, loginUserEdit.getHint());
+            ToastUtils.showShort(this, "请输入联系人姓名");
             return;
         }
         String lianxidianhua = phoneEdit.getText().toString();
         if(TextUtils.isEmpty(lianxidianhua)){
-            ToastUtils.showShort(this, phoneEdit.getHint());
+            ToastUtils.showShort(this, "请输入联系人电话号码");
             return;
         }
         String beizhu = beizhuEdit.getText().toString();
-        if(TextUtils.isEmpty(beizhu)){
+       /* if(TextUtils.isEmpty(beizhu)){
             ToastUtils.showShort(this, beizhuEdit.getHint());
             return;
-        }
+        }*/
 
         OkHttpUtils
                 .get(ApiInterface.SubmitSchoolbus)

@@ -1,5 +1,6 @@
 package chenfei.com.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,9 +39,15 @@ public class UserInfoActivity extends BaseActivity {
     @OnClick(R.id.homeaddressll)
     public void homeaddressll(View view) {
         // TODO submit data to server...
+        Intent startintent = new Intent(this, MapActivity.class);
+        startintent.putExtra("type", 1);
+        startActivityForResult(startintent, 1);
     }
     @OnClick(R.id.companyaddll)
     public void companyaddll(View view) {
+        Intent startintent = new Intent(this, MapActivity.class);
+        startintent.putExtra("type", 2);
+        startActivityForResult(startintent, 2);
         // TODO submit data to server...
     }
     @Override
@@ -51,11 +58,16 @@ public class UserInfoActivity extends BaseActivity {
         InitBase();
         SetMyTitle("用户信息");
         SetRightVisble(false);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         username.setText((String)SPUtils.get(UserInfoActivity.this,"username",""));
         email.setText((String)SPUtils.get(UserInfoActivity.this,"email",""));
         telephone.setText((String)SPUtils.get(UserInfoActivity.this,"telephone",""));
         homeaddress.setText((String)SPUtils.get(UserInfoActivity.this,"homeaddress",""));
         companyadd.setText((String)SPUtils.get(UserInfoActivity.this,"companyaddress",""));
     }
-
 }

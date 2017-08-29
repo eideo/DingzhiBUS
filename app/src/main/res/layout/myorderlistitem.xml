@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/upstop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_start"
+            android:gravity="center_vertical"
+            android:text="起点位置"
+            android:textColor="#ff939393"
+            android:textSize="14.0sp" />
+
+        <TextView
+            android:id="@+id/buslineid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="25dp"
+            android:drawableLeft="@mipmap/bus_icon"
+            android:gravity="center_vertical"
+            android:text="115路"
+            android:textColor="@color/grey"
+            android:textSize="14.0sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/downstop"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/ic_end"
+            android:gravity="center_vertical"
+            android:text="终点位置"
+            android:textColor="#ff939393"
+            android:textSize="14.0sp" />
+
+        <TextView
+            android:id="@+id/totolmoney"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/upimage"
+            android:layout_marginRight="25dp"
+            android:gravity="center_vertical"
+            android:text="￥10元"
+            android:textColor="#ff0000"
+            android:textSize="20.0sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/buytime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/totolmoney"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
+            android:text="xcxcxcxcx16:50"
+            android:textColor="#ff939393"
+            android:textSize="12.0sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/buyticket"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/downimage"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@+id/pingjia"
+            android:background="@drawable/smssdk_btn_enable"
+            android:focusable="false"
+            android:text="再次购票"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/pingjia"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/downimage"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/smssdk_btn_enable"
+            android:focusable="false"
+            android:text="评价晒单"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:visibility="visible" />
+    </LinearLayout>
+</LinearLayout>

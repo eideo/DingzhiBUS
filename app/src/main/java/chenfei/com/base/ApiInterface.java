@@ -42,7 +42,7 @@ public class ApiInterface {
     /**
      * 更新用户信息
      */
-    public static final String Updateuserinformation = baseurl + "new/updateuserinformation.php?";
+    public static final String Updateuserinformation = baseurl + "updateuserinformation.php?";
 
     /**
      * 获取DRT线路上车辆的坐标坐标
@@ -68,11 +68,25 @@ public class ApiInterface {
      */
     public static final String SubmitSchoolbus = baseurl + "saveschoolbus.php?";
 
+    /**
+     * 更新版本
+     */
+    public static final String GetUpdateversion = baseurl + "updateinfo.php?";
+
+    /**
+     * 更新版本
+     */
+    public static final String Updatepassword = baseurl + "updatepassword.php?";
 
 
+    /**
+     * 更新版本
+     */
+    public static final String Getmydrtorderlist = baseurl + "getmydrtorderlist.php?";
 
-
-
-
+    /**
+     * 更新版本
+     */
+    public static final String SaveUsertx = baseurl + "savephoto.php?";
 
 }

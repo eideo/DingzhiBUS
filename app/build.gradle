@@ -60,14 +60,16 @@ dependencies {
     compile files('libs/baidumapapi_util_v4_0_0.jar')
     compile files('libs/locSDK_6.13.jar')
     compile files('libs/MobCommons-2016.0714.1402.jar')
-    compile name:'SMSSDK-2.1.1',ext:'aar'
+    compile name: 'SMSSDK-2.1.1', ext: 'aar'
     compile 'com.flyco.dialog:FlycoDialog_Lib:1.3.0@aar'
     compile 'com.jakewharton:butterknife:8.2.1'
-    apt 'com.jakewharton:butterknife-compiler:8.2.1'//增加这一句
+    apt 'com.jakewharton:butterknife-compiler:8.2.1'
+    //增加这一句
     compile 'com.contrarywind:Android-PickerView:3.2.5'
     compile 'com.lzy.net:okhttputils:1.7.2'
     //可以单独使用，不需要依赖下方的扩展包
     compile 'com.lzy.net:okhttpserver:1.0.1'
+    compile files('libs/scs-android-sdk-0.0.1-SNAPSHOT.jar')
 }
 allprojects {
     repositories {

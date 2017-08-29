@@ -21,4 +21,7 @@
     <color name="lightgray">#d3d3d3</color> <!-- 亮灰色 -->
     <color name="background_tab_pressed">#6633B5E5</color>
     <color name="red">#ef3320</color>
+    <color name="c_e5e5e5">#e5e5e5</color>
+    <color name="space_transparent">#00000000</color>
+    <color name="c_599137">#599137</color>
 </resources>

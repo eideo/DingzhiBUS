@@ -6,7 +6,12 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -23,15 +28,29 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar.OnTabSelectedListener;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.jaeger.library.StatusBarUtil;
+import com.sina.cloudstorage.auth.AWSCredentials;
+import com.sina.cloudstorage.auth.BasicAWSCredentials;
+import com.sina.cloudstorage.services.scs.SCS;
+import com.sina.cloudstorage.services.scs.SCSClient;
+import com.sina.cloudstorage.services.scs.model.S3Object;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Calendar;
 
+import chenfei.com.UI.CircleImageView;
 import chenfei.com.fragment.BaocheFragment;
 import chenfei.com.fragment.FaqiRoadFragment;
 import chenfei.com.fragment.HomeFragment;
 import chenfei.com.fragment.YonghuFragment;
 import chenfei.com.base.BaseActivity;
 import chenfei.com.base.R;
+import chenfei.com.utils.SPUtils;
 
 /**
  * Created by Jaeger on 16/2/14.
@@ -58,6 +77,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,O
     public static ImageView choutiimg;
     public static TextView titletv;
     public static ImageView shareimg;
+    CircleImageView touxiang;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 1) {
+                Bitmap bitmap =getLoacalBitmap(Environment.getExternalStorageDirectory()+"/tempuserhead.jpg"); //从本地取图片(在cdcard中获取)  //
+                if (bitmap!=null) {
+                    touxiang.setImageBitmap(bitmap); //设置Bitmap
+                }
+            }
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +104,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,O
         shareimg.setOnClickListener(this);
          NavigationView navigationView= (NavigationView) findViewById(R.id.navigation);
          View headerView = navigationView.getHeaderView(0);
-        headerView.findViewById(R.id.zhuxiaodenglu).setOnClickListener(this);
+         touxiang = (CircleImageView) headerView.findViewById(R.id.touxiang);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                getObject();
+            }
+        }).start();
+        headerView.findViewById(R.id.guanyuwomenll).setOnClickListener(this);
+        headerView.findViewById(R.id.xinshouzhinanll).setOnClickListener(this);
+        headerView.findViewById(R.id.guizell).setOnClickListener(this);
+        headerView.findViewById(R.id.versionupdatell).setOnClickListener(this);
+        headerView.findViewById(R.id.shiyongxieyill).setOnClickListener(this);
         StatusBarUtil.setColorForDrawerLayout(MainActivity.this, mDrawerLayout, mStatusBarColor, mAlpha);
         StatusBarUtil.setTranslucentForDrawerLayout(MainActivity.this, mDrawerLayout, mAlpha);
         bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
@@ -109,12 +151,28 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,O
                 mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED,
                         Gravity.LEFT);
                 break;
-            case  R.id.zhuxiaodenglu://注销登陆
-                InitEnviroment();
+            case  R.id.guanyuwomenll://关于我们
+              /*  InitEnviroment();
                 Intent zhuxiaointent = new Intent();
                 zhuxiaointent.setClass(this, LoginActivity.class);
                 this.finish();
-                startActivity(zhuxiaointent);
+                startActivity(zhuxiaointent);*/
+                Intent introduceIntent = new Intent();
+                introduceIntent.setClass(MainActivity.this, IntroduceAcitivity.class);
+                startActivity(introduceIntent);
+                break;
+            case  R.id.xinshouzhinanll://新手指南
+               break;
+            case  R.id.guizell://购票规则
+                break;
+            case  R.id.versionupdatell://版本更新
+                startActivity(new Intent(MainActivity.this, UpadateversionActivity.class));
+                break;
+            case  R.id.shiyongxieyill://使用协议
+                Intent dealIntent = new Intent();
+                dealIntent.setClass(MainActivity.this, dealAcitivity.class);
+                startActivity(dealIntent);
+                break;
         }
     }
 
@@ -209,5 +267,76 @@ public class MainActivity extends BaseActivity implements View.OnClickListener,O
             shareimg.setVisibility(View.INVISIBLE);
         }
     }
+    /**
+     * 下载object
+     *  //断点续传
+     *  GetObjectRequest rangeObjectRequest = new GetObjectRequest("test11", "/test/file.txt");
+     *  rangeObjectRequest.setRange(0, 10); // retrieve 1st 10 bytes.
+     *  S3Object objectPortion = conn.getObject(rangeObjectRequest);
+     *
+     *  InputStream objectData = objectPortion.getObjectContent();
+     *  // "Process the objectData stream.
+     *  objectData.close();
+     */
+    public void getObject(){
+        String accessKey = "2lr5pkyVNtZYXv6W44TV";
+        String secretKey = "661f0c7733e6aa5d88c273d634b15f6846a688b2";
+        AWSCredentials credentials = new BasicAWSCredentials(accessKey, secretKey);
+        SCS conn = new SCSClient(credentials);
+        //SDKGlobalConfiguration.setGlobalTimeOffset(-60*5);//自定义全局超时时间5分钟以后(可选项)
+        S3Object s3Obj = conn.getObject("dingzhibus", "touxiang/"+(String) SPUtils.get(this,"telephone","")+".jpg");
+        InputStream in = s3Obj.getObjectContent();
+        byte[] buf = new byte[1024];
+        OutputStream out = null;
+        try {
+            out = new FileOutputStream(new File(Environment.getExternalStorageDirectory()+"/tempuserhead.jpg"));
+            int count;
+            while( (count = in.read(buf)) != -1)
+            {
+                if( Thread.interrupted() )
+                {
+                    throw new InterruptedException();
+                }
+                out.write(buf, 0, count);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally{
+            //SDKGlobalConfiguration.setGlobalTimeOffset(0);//还原超时时间
+            try {
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                in.close();
+                Message msg = new Message();
+                msg.what = 1;
+                handler.sendMessage(msg);
 
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 加载本地图片
+     * @param url
+     * @return
+     */
+    public static Bitmap getLoacalBitmap(String url) {
+        try {
+            FileInputStream fis = new FileInputStream(url);
+            return BitmapFactory.decodeStream(fis);  ///把流转化为Bitmap图片
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

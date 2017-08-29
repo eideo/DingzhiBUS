@@ -14,11 +14,11 @@ import chenfei.com.utils.SPUtils;
 public class BaseActivity extends AppCompatActivity {
 
 
-    private ImageButton backbtn;//返回
+    public ImageButton backbtn;//返回
     public static TextView titletv;//标题
-    private ImageButton rightbtn;
+    public ImageButton rightbtn;
     public static final String FILE_NAME = "share_data";
-
+    public SharedPreferences sp;
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
@@ -70,7 +70,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void saveEnvironment(String loginname, String loginpass, Userinfo.DataBean userdata,String issaved) {
 
-        SharedPreferences sp = getSharedPreferences(FILE_NAME,
+        sp = getSharedPreferences(FILE_NAME,
                 Context.MODE_PRIVATE); // 私有数据
         SharedPreferences.Editor editor = sp.edit();// 获取编辑�?
         editor.putString("loginname", loginname);
@@ -92,5 +92,20 @@ public class BaseActivity extends AppCompatActivity {
 
     public void InitEnviroment() {
         SPUtils.clear(BaseActivity.this);
+    }
+
+
+    /**
+     * @param name
+     * @param defaultStr
+     * @return 自定义默认值的String
+     */
+    public  String getStringData(String name, String defaultStr) {
+
+        if (sp == null) {
+            sp = getSharedPreferences(FILE_NAME, 0);
+        }
+
+        return sp.getString(name, defaultStr);
     }
 }

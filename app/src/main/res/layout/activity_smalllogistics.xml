@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linear_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:visibility="gone"></LinearLayout>
+
+    <include layout="@layout/titlelayout1" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="出发地点"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/ic_blank_input_style"
+                android:drawableLeft="@mipmap/chufadi"
+                android:drawablePadding="15dp"
+                android:gravity="left|center_vertical"
+                android:imeOptions="actionNext"
+                android:maxLength="18"
+                android:singleLine="true"
+                android:textColorHint="@color/color_hint_text"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_separate_line" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="目的地"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/ic_blank_input_style"
+                android:drawableLeft="@mipmap/mudidi"
+                android:drawablePadding="15dp"
+                android:gravity="left|center_vertical"
+                android:imeOptions="actionNext"
+                android:maxLength="18"
+                android:singleLine="true"
+                android:textColorHint="@color/color_hint_text"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_separate_line" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="详细地址"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
+                android:textStyle="bold"></TextView>
+
+            <EditText
+                android:id="@+id/xiangxidizhi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/ic_blank_input_style"
+                android:drawableLeft="@mipmap/xiangxidizhi"
+                android:drawablePadding="15dp"
+                android:gravity="left|center_vertical"
+                android:imeOptions="actionNext"
+                android:maxLength="18"
+                android:singleLine="true"
+                android:textColorHint="@color/color_hint_text"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_separate_line" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="重量(kg)"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
+                android:textStyle="bold"></TextView>
+
+            <EditText
+                android:id="@+id/zhongliang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/ic_blank_input_style"
+                android:drawableLeft="@mipmap/zhongliang"
+                android:drawablePadding="15dp"
+                android:gravity="left|center_vertical"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:maxLength="18"
+                android:singleLine="true"
+                android:textColorHint="@color/color_hint_text"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_separate_line" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="体积(m³)"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
+                android:textStyle="bold"></TextView>
+
+            <EditText
+                android:id="@+id/tj"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/ic_blank_input_style"
+                android:drawableLeft="@mipmap/tiji"
+                android:drawablePadding="15dp"
+                android:gravity="left|center_vertical"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:maxLength="18"
+                android:singleLine="true"
+                android:textColorHint="@color/color_hint_text"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_separate_line" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="提货方式"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
+                android:textStyle="bold"></TextView>
+
+            <TextView
+                android:id="@+id/quhuofangshi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/ic_blank_input_style"
+                android:drawableLeft="@mipmap/tihuofangshi"
+                android:drawablePadding="15dp"
+                android:gravity="left|center_vertical"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:maxLength="18"
+                android:text="自提"
+                android:singleLine="true"
+                android:textColorHint="@color/color_hint_text"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_separate_line" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="联系人"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
+                android:textStyle="bold"></TextView>
+
+            <EditText
+                android:id="@+id/login_user_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/ic_blank_input_style"
+                android:drawableLeft="@mipmap/lianxiren"
+                android:drawablePadding="15dp"
+                android:gravity="left|center_vertical"
+                android:imeOptions="actionNext"
+                android:maxLength="18"
+                android:singleLine="true"
+                android:textColorHint="@color/color_hint_text"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_separate_line" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="联系人电话"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
+                android:textStyle="bold"></TextView>
+
+            <EditText
+                android:id="@+id/phone_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/ic_blank_input_style"
+                android:drawableLeft="@mipmap/lianxidianhua"
+                android:drawablePadding="15dp"
+                android:gravity="left|center_vertical"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:maxLength="18"
+                android:singleLine="true"
+                android:textColorHint="@color/color_hint_text"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_separate_line" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="备注"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
+                android:textStyle="bold"></TextView>
+
+            <EditText
+                android:id="@+id/beizhu_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/ic_blank_input_style"
+                android:drawableLeft="@mipmap/beizhu"
+                android:drawablePadding="15dp"
+                android:gravity="left|center_vertical"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:lines="4"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_separate_line" />
+
+            <Button
+                android:id="@+id/login_login_btn"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/smssdk_btn_enable"
+                android:text="提交订单"
+                android:textColor="#ffffff"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:id="@+id/rules_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="@color/lightgray"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/text_item_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="小件物流收费标准:"
+                    android:textColor="@color/uvv_black"
+                    android:textSize="15sp"
+                    />
+
+                <TextView
+                    android:id="@+id/text_rules"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="1、快运业务适应范围：计费重量：10～500公斤（计费重量超过500公斤的货物,建议从我公司零
+     担专线发货,敬请咨询：0553-2960885）；
+2、快运计费重量核算方法：运费按公斤计费；泡货按计泡重量核算，1立方米=230公斤（例：货物
+     体积0.4立方米，称重60公斤，计费重量按：0.4*230=92公斤）；重货按称重核算；
+3、快运服务区域：全国4000多个网点覆盖，网点区域内支持送货上门,区域外送货,需补送货费；
+4、增值服务：上门提货、送货上楼、代签回单、代收货款、货物包装（纸箱、木架、木箱）；
+5、优惠政策：长期客户、电商客户、物流业同行、单次发货计费重量超过500公斤，敬请电话
+     （0553-2960887）咨询。
+6、此报价表内所涉及的金额，均为不含税价,易碎、超限、液体等货物发运，不在此报价范围内。"
+                    android:textColor="@color/color_hint_text"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

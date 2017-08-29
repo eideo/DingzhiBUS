@@ -64,7 +64,7 @@ public class NearlinesAcitivity extends BaseActivity{
 		tabs = (PagerSlidingTabStrip) findViewById(R.id.nearlinestabs);
 		tabs.setViewPager(viewPager);
 		InitBase();
-		SetMyTitle("附近路线");
+		SetMyTitle("班线班车");
 		SetRightVisble(false);
 		setTabsValue();
 	}

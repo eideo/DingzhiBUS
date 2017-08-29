@@ -40,7 +40,11 @@ import chenfei.com.activity.DingzhiBusActivity;
 import chenfei.com.activity.MainActivity;
 import chenfei.com.activity.NearlinesAcitivity;
 import chenfei.com.base.R;
+import chenfei.com.home.CompanyBusActivity;
+import chenfei.com.home.NoStopActivity;
 import chenfei.com.home.SchoolBusActivity;
+import chenfei.com.home.SmalllogisticsActivity;
+import chenfei.com.home.TravelListActivity;
 
 import android.widget.LinearLayout;
 
@@ -102,16 +106,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 startActivity(new Intent(getActivity(), NearlinesAcitivity.class));
                 break;
             case R.id.xiaojianwuliull:
+                startActivity(new Intent(getActivity(), SmalllogisticsActivity.class));
                 break;
             case R.id.zhoumobanchell:
+                startActivity(new Intent(getActivity(), CompanyBusActivity.class));
                 break;
             case R.id.zhidachell:
+                startActivity(new Intent(getActivity(), NoStopActivity.class));
                 break;
             case R.id.dingzhibusll:
                 Intent dingzhiintent=new Intent(getActivity(), DingzhiBusActivity.class);
                 startActivity(dingzhiintent);
                 break;
             case R.id.lvyoubusll:
+                startActivity(new Intent(getActivity(), TravelListActivity.class));
                 break;
             default:
                 break;
